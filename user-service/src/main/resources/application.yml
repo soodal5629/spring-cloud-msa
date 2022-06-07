@@ -1,10 +1,12 @@
 server:
-  port: 9001
+  port: 0 # 여러개의 인스턴스에 랜덤하게 포트가 부여됨(랜덤포트)
 spring:
   application:
     name: user-service
 
 eureka:
+  instance:
+    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}} # 이게 없으면 인스턴스 여러개 떠도 유레카에 1개 서비스만 보임(0번 포트)
   client:
     register-with-eureka: true
     fetch-registry: true
