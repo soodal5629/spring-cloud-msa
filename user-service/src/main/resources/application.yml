@@ -3,6 +3,12 @@ server:
 spring:
   application:
     name: user-service
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true # 웹에서 접속 허용
+      path: /h2-console # 접속하고자 하는 웹 브라우저에서 h2-console의 주소
 
 eureka:
   instance:
