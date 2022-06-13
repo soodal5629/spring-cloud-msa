@@ -3,11 +3,12 @@ package com.example.userservice.mapper;
 import com.example.userservice.dto.UserDto;
 import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.vo.RequestUser;
+import com.example.userservice.vo.ResponseUser;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-06-13T11:54:13+0900",
+    date = "2022-06-13T14:35:36+0900",
     comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.1 (Oracle Corporation)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -41,5 +42,20 @@ public class UserMapperImpl implements UserMapper {
         userDto.pwd( requestUser.getPwd() );
 
         return userDto.build();
+    }
+
+    @Override
+    public ResponseUser toResponseUser(UserDto userDto) {
+        if ( userDto == null ) {
+            return null;
+        }
+
+        ResponseUser responseUser = new ResponseUser();
+
+        responseUser.setEmail( userDto.getEmail() );
+        responseUser.setName( userDto.getName() );
+        responseUser.setUserId( userDto.getUserId() );
+
+        return responseUser;
     }
 }
