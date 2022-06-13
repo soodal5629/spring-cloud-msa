@@ -30,9 +30,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/health-check")
+    @GetMapping("/user-service/health-check")
     public String status(){
-        return "It's Working in User Service";
+        return String.format("It's Working in User Service on PORT %s",
+                env.getProperty("local.server.port"));
     }
 
     @GetMapping("/welcome")
@@ -41,6 +42,7 @@ public class UserController {
         return greeting.getMessage();
     }
 
+    /* 사용자 등록 */
     @PostMapping("/users")
     public ResponseEntity<ResponseUser> createUser(@RequestBody RequestUser user){
         UserDto userDto = UserMapper.INSTANCE.toDto(user);
