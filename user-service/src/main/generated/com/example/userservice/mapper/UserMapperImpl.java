@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-06-13T14:35:36+0900",
+    date = "2022-06-13T15:09:19+0900",
     comments = "version: 1.5.1.Final, compiler: javac, environment: Java 11.0.1 (Oracle Corporation)"
 )
 public class UserMapperImpl implements UserMapper {
@@ -40,6 +40,22 @@ public class UserMapperImpl implements UserMapper {
         userDto.email( requestUser.getEmail() );
         userDto.name( requestUser.getName() );
         userDto.pwd( requestUser.getPwd() );
+
+        return userDto.build();
+    }
+
+    @Override
+    public UserDto entityToDto(UserEntity userEntity) {
+        if ( userEntity == null ) {
+            return null;
+        }
+
+        UserDto.UserDtoBuilder userDto = UserDto.builder();
+
+        userDto.email( userEntity.getEmail() );
+        userDto.name( userEntity.getName() );
+        userDto.userId( userEntity.getUserId() );
+        userDto.encryptedPwd( userEntity.getEncryptedPwd() );
 
         return userDto.build();
     }
