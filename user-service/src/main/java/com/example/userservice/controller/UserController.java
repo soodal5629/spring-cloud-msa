@@ -27,6 +27,7 @@ public class UserController {
     @Autowired // 권장하지 않지만 여기서는 간단한 예제이므로..
     private Greeting greeting;
 
+    @Autowired
     public UserController(Environment env, UserService userService) {
         this.env = env;
         this.userService = userService;
