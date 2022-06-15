@@ -7,5 +7,4 @@ import java.io.Serializable;
 
 @Data
 public class OrderDto extends OrderData implements Serializable {
-
 }

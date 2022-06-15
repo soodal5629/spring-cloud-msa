@@ -28,7 +28,7 @@ public class OrderController {
     }
 
     @GetMapping("/health-check")
-    public String status(){
+    public String status() {
         return String.format("It's Working in Order Service on PORT %s",
                 env.getProperty("local.server.port"));
     }
@@ -36,7 +36,7 @@ public class OrderController {
     /* 주문 등록 */
     @PostMapping("/{userId}/orders")
     public ResponseEntity<ResponseOrder> createOrder(@PathVariable String userId,
-                                                     @RequestBody RequestOrder requestOrder){
+                                                     @RequestBody RequestOrder requestOrder) {
         OrderDto orderDto = OrderMapper.INSTANCE.toDto(requestOrder);
         orderDto.setUserId(userId);
         OrderDto createOrder = orderService.createOrder(orderDto);
@@ -46,7 +46,7 @@ public class OrderController {
 
     @GetMapping("/{userId}/orders")
     public ResponseEntity<List<ResponseOrder>> getOrders(@PathVariable String userId,
-                                                     @RequestBody RequestOrder requestOrder){
+                                                         @RequestBody RequestOrder requestOrder) {
         Iterable<OrderEntity> orderList = orderService.getOrdersByUserId(userId);
         List<ResponseOrder> result = new ArrayList<>();
         orderList.forEach(v -> {
