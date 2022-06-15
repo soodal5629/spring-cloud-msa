@@ -1,6 +1,6 @@
-package com.example.olderservice.dto;
+package com.example.orderservice.dto;
 
-import com.example.olderservice.data.OrderData;
+import com.example.orderservice.data.OrderData;
 import lombok.Data;
 
 import java.io.Serializable;

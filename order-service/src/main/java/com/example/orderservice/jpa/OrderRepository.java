@@ -1,4 +1,4 @@
-package com.example.olderservice.jpa;
+package com.example.orderservice.jpa;
 
 import org.springframework.data.repository.CrudRepository;
 

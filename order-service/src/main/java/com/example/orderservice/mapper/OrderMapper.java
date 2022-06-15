@@ -1,9 +1,9 @@
-package com.example.olderservice.mapper;
+package com.example.orderservice.mapper;
 
-import com.example.olderservice.data.OrderData;
-import com.example.olderservice.dto.OrderDto;
-import com.example.olderservice.jpa.OrderEntity;
-import com.example.olderservice.vo.ResponseOrder;
+import com.example.orderservice.data.OrderData;
+import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.jpa.OrderEntity;
+import com.example.orderservice.vo.ResponseOrder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

@@ -1,4 +1,4 @@
-package com.example.olderservice.data;
+package com.example.orderservice.data;
 
 import lombok.Data;
 

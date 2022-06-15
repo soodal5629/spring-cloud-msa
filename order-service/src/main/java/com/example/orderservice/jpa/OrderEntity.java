@@ -1,6 +1,6 @@
-package com.example.olderservice.jpa;
+package com.example.orderservice.jpa;
 
-import com.example.olderservice.data.OrderData;
+import com.example.orderservice.data.OrderData;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 

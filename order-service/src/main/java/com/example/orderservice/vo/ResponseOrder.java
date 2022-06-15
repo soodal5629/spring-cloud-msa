@@ -1,6 +1,6 @@
-package com.example.olderservice.vo;
+package com.example.orderservice.vo;
 
-import com.example.olderservice.data.OrderData;
+import com.example.orderservice.data.OrderData;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 

@@ -1,11 +1,11 @@
-package com.example.olderservice.controller;
+package com.example.orderservice.controller;
 
-import com.example.olderservice.dto.OrderDto;
-import com.example.olderservice.jpa.OrderEntity;
-import com.example.olderservice.mapper.OrderMapper;
-import com.example.olderservice.service.OrderService;
-import com.example.olderservice.vo.RequestOrder;
-import com.example.olderservice.vo.ResponseOrder;
+import com.example.orderservice.dto.OrderDto;
+import com.example.orderservice.jpa.OrderEntity;
+import com.example.orderservice.mapper.OrderMapper;
+import com.example.orderservice.service.OrderService;
+import com.example.orderservice.vo.RequestOrder;
+import com.example.orderservice.vo.ResponseOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
