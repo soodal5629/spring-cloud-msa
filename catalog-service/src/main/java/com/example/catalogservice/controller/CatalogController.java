@@ -1,6 +1,5 @@
 package com.example.catalogservice.controller;
 
-import com.example.catalogservice.dto.CatalogDto;
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.mapper.CatalogMapper;
 import com.example.catalogservice.service.CatalogService;
