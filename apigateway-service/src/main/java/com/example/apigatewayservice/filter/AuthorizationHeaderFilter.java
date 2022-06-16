@@ -20,6 +20,8 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     private Environment env;
 
     public AuthorizationHeaderFilter(Environment env) {
+        // Config 정보를 필터에 적용할 수 있는 부가정보로서 캐스팅시켜주는 작업을 부모 클래스에 알려줘야 함
+        super(Config.class); // 부모 클래스에 Config 정보 전달
         this.env = env;
     }
 
