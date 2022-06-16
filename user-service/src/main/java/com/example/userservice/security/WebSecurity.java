@@ -4,6 +4,7 @@ import com.example.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,7 +19,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     private Environment env;
 
     @Autowired
-    public WebSecurity(UserService userService, Environment env) {
+    public WebSecurity(@Lazy UserService userService, Environment env) {
         this.userService = userService;
         this.env = env;
     }

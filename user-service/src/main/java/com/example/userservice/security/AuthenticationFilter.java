@@ -22,7 +22,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
             RequestLogin creds = new ObjectMapper().readValue(request.getInputStream(), RequestLogin.class);
             return getAuthenticationManager().authenticate( // 사용자가 입력한 이메일, pwd로 인증처리
                     new UsernamePasswordAuthenticationToken(creds.getEmail(),
-                    creds.getPassword(), new ArrayList<>()) // 사용자가 입력한 값을 스프링 시큐리티가 이용할 수 있는 값으로 만들어줌
+                    creds.getPwd(), new ArrayList<>()) // 사용자가 입력한 값을 스프링 시큐리티가 이용할 수 있는 값으로 만들어줌
             );
 
         }catch(IOException e){
