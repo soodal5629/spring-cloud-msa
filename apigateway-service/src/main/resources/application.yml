@@ -30,7 +30,7 @@ spring:
             - Path=/user-service/login
             - Method=POST
           filters:
-            - RemoveRequestsHeader=Cookie # 헤더값 초기화 (post 데이터를 매번 새로운 데이터처럼 인식하기 위해)
+            - RemoveRequestHeader=Cookie # 헤더값 초기화 (post 데이터를 매번 새로운 데이터처럼 인식하기 위해)
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE
@@ -38,7 +38,7 @@ spring:
             - Path=/user-service/users # 회원가입
             - Method=POST
           filters:
-            - RemoveRequestsHeader=Cookie
+            - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: user-service
           uri: lb://USER-SERVICE
@@ -46,8 +46,9 @@ spring:
             - Path=/user-service/** # 로그인, 회원가입 이외의 모든 서비스
             - Method=GET
           filters:
-            - RemoveRequestsHeader=Cookie
+            - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+            - AuthorizationHeaderFilter # jwt 유효성, 인증 및 로그인 된 회원인지 확인
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # 유레카 서버를 통해 MS discovery
           predicates: # 조건
@@ -77,3 +78,7 @@ spring:
                 postLogger: true
 #            - AddRequestHeader=second-request, second-request-header2
 #            - AddResponseHeader=second-response, second-response-header2
+
+
+token:
+  secret: user_token
