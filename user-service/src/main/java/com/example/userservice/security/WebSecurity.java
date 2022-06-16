@@ -47,7 +47,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     /* 인증 관련 메소드 */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder()); //사용자가 로그인 시 입력한 패스워드 암호화
     }
 
     @Bean
