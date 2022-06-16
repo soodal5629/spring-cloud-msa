@@ -20,10 +20,34 @@ spring:
             preLogger: true
             postLogger: true
       routes:
+#        - id: user-service
+#          uri: lb://USER-SERVICE # 유레카 서버를 통해 MS discovery
+#          predicates: # 조건
+#            - Path=/user-service/**
         - id: user-service
-          uri: lb://USER-SERVICE # 유레카 서버를 통해 MS discovery
-          predicates: # 조건
-            - Path=/user-service/**
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/login
+            - Method=POST
+          filters:
+            - RemoveRequestsHeader=Cookie # 헤더값 초기화 (post 데이터를 매번 새로운 데이터처럼 인식하기 위해)
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/users # 회원가입
+            - Method=POST
+          filters:
+            - RemoveRequestsHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/** # 로그인, 회원가입 이외의 모든 서비스
+            - Method=GET
+          filters:
+            - RemoveRequestsHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # 유레카 서버를 통해 MS discovery
           predicates: # 조건
