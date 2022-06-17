@@ -9,9 +9,13 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 spring:
+  config:
+    import: "optional:configserver:http://localhost:8888"
   application:
     name: apigateway-service
   cloud:
+    config:
+      name: ecommerce # ecommerce.yml 데이터 가져오기
     gateway:
       default-filters: # 공통 필터 (global filter)
         - name: GlobalFilter
@@ -43,12 +47,21 @@ spring:
         - id: user-service
           uri: lb://USER-SERVICE
           predicates:
+            - Path=/user-service/actuator/**
+            - Method=GET,POST
+          filters:
+            - RemoveRequestHeader=Cookie
+            - RewritePath=/user-service/(?<segment>.*), /$\{segment}
+        - id: user-service
+          uri: lb://USER-SERVICE
+          predicates:
             - Path=/user-service/** # 로그인, 회원가입 이외의 모든 서비스
             - Method=GET
           filters:
             - RemoveRequestHeader=Cookie
             - RewritePath=/user-service/(?<segment>.*), /$\{segment}
             - AuthorizationHeaderFilter # jwt 유효성, 인증 및 로그인 된 회원인지 확인
+
         - id: catalog-service
           uri: lb://CATALOG-SERVICE # 유레카 서버를 통해 MS discovery
           predicates: # 조건
@@ -79,6 +92,11 @@ spring:
 #            - AddRequestHeader=second-request, second-request-header2
 #            - AddResponseHeader=second-response, second-response-header2
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans, httptrace
 
 token:
   secret: user_token
