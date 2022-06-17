@@ -17,6 +17,7 @@ spring:
   cloud:
     config:
       name: ecommerce # ecommerce.yml 데이터 가져오기
+      profile: dev
 
 eureka:
   instance:
