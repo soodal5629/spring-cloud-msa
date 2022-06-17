@@ -30,6 +30,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         //http.authorizeHttpRequests().antMatchers("/users/**").permitAll(); // 인증 없이 사용 가능
+        http.authorizeRequests().antMatchers("/actuator/**").permitAll();
         http.authorizeRequests().antMatchers("/**")
                 .access("hasIpAddress('" + IP_ADDRESS + "')")  // 해당 IP 로부터 요청이 왔다면 접근을 허용
                 .and()
