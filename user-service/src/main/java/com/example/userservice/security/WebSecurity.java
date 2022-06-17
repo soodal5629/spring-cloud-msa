@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserService userService;
     private Environment env;
+    private String IP_ADDRESS = "10.131.153.2";
 
     @Autowired
     public WebSecurity(@Lazy UserService userService, Environment env) {
@@ -30,7 +31,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         //http.authorizeHttpRequests().antMatchers("/users/**").permitAll(); // 인증 없이 사용 가능
         http.authorizeRequests().antMatchers("/**")
-                .hasIpAddress("10.131.153.2") // 해당 IP 로부터 요청이 왔다면 접근을 허용
+                .access("hasIpAddress('" + IP_ADDRESS + "')")  // 해당 IP 로부터 요청이 왔다면 접근을 허용
                 .and()
                 .addFilter(getAuthenticationFilter()); // 이 필터를 통과시킨 데이터에 한해서만 권한을 부여하고 작업 진행시킴
 
