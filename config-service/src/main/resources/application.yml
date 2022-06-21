@@ -19,3 +19,10 @@ management: # actuator endpoint 설정
     web:
       exposure:
         include: health, busrefresh
+
+encrypt:
+  key-store:
+    location: file:///C:/workSpace/keystore/apiEncryptionKey.jks # 비대칭 키
+    password: test1234
+    alias: apiEncryptionKey
+  # key: abcdefghijklmnopqrstuvwxyz0123456789 # 대칭키에 사용되는 키 --> 암호화 시켜줌, but MS 에는 해당키로 복호화 한 값 전달
