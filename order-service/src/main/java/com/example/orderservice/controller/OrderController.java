@@ -45,8 +45,7 @@ public class OrderController {
     }
 
     @GetMapping("/{userId}/orders")
-    public ResponseEntity<List<ResponseOrder>> getOrders(@PathVariable String userId,
-                                                         @RequestBody RequestOrder requestOrder) {
+    public ResponseEntity<List<ResponseOrder>> getOrders(@PathVariable String userId) {
         Iterable<OrderEntity> orderList = orderService.getOrdersByUserId(userId);
         List<ResponseOrder> result = new ArrayList<>();
         orderList.forEach(v -> {
