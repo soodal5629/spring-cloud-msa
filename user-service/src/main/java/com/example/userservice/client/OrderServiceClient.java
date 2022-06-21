@@ -11,6 +11,6 @@ import java.util.List;
 public interface OrderServiceClient {
 
     @GetMapping("/order-service/{userId}/orders")
-    List<ResponseOrder>  getOrders(@PathVariable String userId);
+    List<ResponseOrder>  getOrders(@PathVariable("userId") String userId); // @PathValiable 의 ("userId") 생략하면 에러 발생
 
 }
