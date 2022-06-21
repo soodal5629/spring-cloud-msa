@@ -16,7 +16,7 @@ public class UserServiceApplication {
     }
 
     @Bean
-    @LoadBalanced
+    @LoadBalanced // 유레카에 등록된 MS 이름을 찾아서 바로 해당 MS에 접근
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
     }
