@@ -14,15 +14,15 @@ spring:
       settings:
         web-allow-others: true # 웹에서 접속 허용
       path: /h2-console # 접속하고자 하는 웹 브라우저에서 h2-console의 주소
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:testdb # jpa -> 테이블 자동 생성
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:testdb # jpa -> 테이블 자동 생성
   config:
     import: "optional:configserver:http://localhost:8888"
   cloud:
     config:
-      name: ecommerce # ecommerce.yml 데이터 가져오기
-      profile: dev
+      name: user-service # ecommerce.yml 데이터 가져오기
+      #profile: dev
 
 eureka:
   instance:
