@@ -1,5 +1,6 @@
 package com.example.userservice;
 
+import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -21,5 +22,11 @@ public class UserServiceApplication {
     @LoadBalanced // 유레카에 등록된 MS 이름을 찾아서 바로 해당 MS에 접근
     public RestTemplate getRestTemplate(){
         return new RestTemplate();
+    }
+
+    /* Logger 관련된 빈 등록  - Feign client 가 호출되면 관련 정보 확인 가능 */
+    @Bean
+    public Logger.Level feignLoggerLevel(){
+        return Logger.Level.FULL;
     }
 }
