@@ -82,13 +82,16 @@ public class UserServiceImpl implements UserService{
 
         /* Using FeignClient --> Order Micro Service 호출 */
 
-        List<ResponseOrder> orderList = null;
-        /* Feign Exception Handling */
-        try{
-            orderList = orderServiceClient.getOrders(userId);
-        } catch(FeignException e){
-            log.error(e.getMessage());
-        }
+//        /* Feign Exception Handling 1번째 방법 */
+//        List<ResponseOrder> orderList = null;
+//        try{
+//            orderList = orderServiceClient.getOrders(userId);
+//        } catch(FeignException e){
+//            log.error(e.getMessage());
+//        }
+
+        /* ErrorDecoder 이용하는 예외처리 두번째 방법 */
+        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
         userDto.setOrders(orderList);
 
         return userDto;
