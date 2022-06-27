@@ -17,7 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class WebSecurity extends WebSecurityConfigurerAdapter {
     private UserService userService;
     private Environment env;
-    private String IP_ADDRESS = "10.131.153.2";
+    private String IP_ADDRESS = "192.168.219.104";
 
     @Autowired
     public WebSecurity(@Lazy UserService userService, Environment env) {

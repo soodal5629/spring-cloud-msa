@@ -6,6 +6,8 @@ import com.example.userservice.jpa.UserEntity;
 import com.example.userservice.jpa.UserRepository;
 import com.example.userservice.mapper.UserMapper;
 import com.example.userservice.vo.ResponseOrder;
+import feign.FeignException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService{
 
     private UserRepository userRepository;
@@ -78,7 +81,14 @@ public class UserServiceImpl implements UserService{
         */
 
         /* Using FeignClient --> Order Micro Service 호출 */
-        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+
+        List<ResponseOrder> orderList = null;
+        /* Feign Exception Handling */
+        try{
+            orderList = orderServiceClient.getOrders(userId);
+        } catch(FeignException e){
+            log.error(e.getMessage());
+        }
         userDto.setOrders(orderList);
 
         return userDto;

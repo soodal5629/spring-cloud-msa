@@ -10,7 +10,7 @@ import java.util.List;
 @FeignClient(name = "order-service") // 호출하려는 MS 서비스 이름
 public interface OrderServiceClient {
 
-    @GetMapping("/order-service/{userId}/orders")
+    @GetMapping("/order-service/{userId}/orders_ng")
     List<ResponseOrder>  getOrders(@PathVariable("userId") String userId); // @PathValiable 의 ("userId") 생략하면 에러 발생
 
 }
