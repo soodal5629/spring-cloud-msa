@@ -1,6 +1,7 @@
 package com.example.userservice;
 
 import com.example.userservice.error.FeignErrorDecoder;
+import com.example.userservice.service.UserService;
 import feign.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -36,4 +37,9 @@ public class UserServiceApplication {
 //    public FeignErrorDecoder getFeignErrorDecoder(){
 //        return new FeignErrorDecoder();
 //    }
+
+    @Bean
+    public TestDataInit testDataInit(UserService userService) {
+        return new TestDataInit(userService);
+    }
 }
