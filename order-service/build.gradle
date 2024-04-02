@@ -35,7 +35,11 @@ dependencies {
     runtimeOnly group: 'com.h2database', name: 'h2', version: '1.3.176'
     annotationProcessor 'org.projectlombok:lombok'
 
-    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.3'
+    implementation 'mysql:mysql-connector-java'
+    //implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.3'
+
+    // kafka
+    implementation group: 'org.springframework.kafka', name: 'spring-kafka'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
