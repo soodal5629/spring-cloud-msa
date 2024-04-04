@@ -9,6 +9,8 @@ import com.example.userservice.vo.ResponseOrder;
 import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreaker;
+import org.springframework.cloud.client.circuitbreaker.CircuitBreakerFactory;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
@@ -33,16 +35,18 @@ public class UserServiceImpl implements UserService{
     private Environment env;
     private RestTemplate restTemplate;
     private OrderServiceClient orderServiceClient;
+    private CircuitBreakerFactory circuitBreakerFactory;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder,
                            Environment env, RestTemplate restTemplate,
-                           OrderServiceClient orderServiceClient) {
+                           OrderServiceClient orderServiceClient, CircuitBreakerFactory circuitBreakerFactory) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.env = env;
         this.restTemplate = restTemplate;
         this.orderServiceClient = orderServiceClient;
+        this.circuitBreakerFactory = circuitBreakerFactory;
     }
 
     @Override
@@ -91,7 +95,12 @@ public class UserServiceImpl implements UserService{
 //        }
 
         /* ErrorDecoder 이용하는 예외처리 두번째 방법 */
-        List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+        //List<ResponseOrder> orderList = orderServiceClient.getOrders(userId);
+
+        /* Circuit Breaker 사용 */
+        CircuitBreaker circuitbreaker = circuitBreakerFactory.create("circuitbreaker");
+        List<ResponseOrder> orderList = circuitbreaker.run(() -> orderServiceClient.getOrders(userId)
+                , throwable -> new ArrayList<>()); // 오류 날 경우(Circuit Breaker open) 빈 리스트 반환
         userDto.setOrders(orderList);
 
         return userDto;
