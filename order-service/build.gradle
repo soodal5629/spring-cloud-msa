@@ -41,6 +41,10 @@ dependencies {
     // kafka
     implementation group: 'org.springframework.kafka', name: 'spring-kafka'
 
+    // zipkin
+    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin:2.2.3.RELEASE'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
