@@ -45,6 +45,11 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
     implementation 'org.springframework.cloud:spring-cloud-starter-zipkin:2.2.3.RELEASE'
 
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.6.3'
+
+    // micrometer
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
